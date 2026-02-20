@@ -1,0 +1,17 @@
+const express = require('express');
+const dotenv = require('dotenv');
+const userRoutes = require('./routes/users.routes');
+const errorMiddleware = require('./middlewares/error.middleware');
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+
+app.use('/users', userRoutes);
+app.use(errorMiddleware);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
